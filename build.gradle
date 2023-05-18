@@ -1,0 +1,36 @@
+allprojects {
+
+    if (project.getRootProject() == project) {
+        project.tasks.register("dummy") {
+            it.configure {
+                project.allprojects.each { it.status = 'release' }
+            }
+        }
+    }
+
+    project.status = 'candidate'
+    println "Initial status = ${project.status}" 
+}
+
+allprojects {
+    tasks.whenTaskAdded { task ->
+
+    }  
+}
+
+allprojects {
+    afterEvaluate {
+         println "After evaluate status ${project.status}"
+    }   
+}
+
+
+task something() {
+    doFirst {
+
+    }
+}
+
+
+
+
